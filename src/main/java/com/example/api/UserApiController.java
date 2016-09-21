@@ -1,10 +1,13 @@
 package com.example.api;
 
+import com.example.common.user.User;
 import com.example.common.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * Created by bequs-xhjlee on 2016-09-21.
@@ -17,7 +20,7 @@ public class UserApiController {
     private UserService userService;
 
     @GetMapping("/list")
-    public String list() {
-        return userService.find();
+    public List<User> list() {
+        return userService.findAll();
     }
 }

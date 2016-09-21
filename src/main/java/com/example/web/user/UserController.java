@@ -19,7 +19,6 @@ public class UserController {
 
     @GetMapping("/list")
     public void list(Model model) {
-        String name = userService.find();
-        model.addAttribute("name", name);
+        model.addAttribute(userService.findAll());
     }
 }

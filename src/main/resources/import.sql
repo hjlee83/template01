@@ -1,3 +1,5 @@
+INSERT INTO TBL_ACCOUNT (ac, pw) VALUES ('test', '1');
+
 INSERT INTO TBL_USER (name) VALUES ('호진');
 INSERT INTO TBL_USER (name) VALUES ('덩미');
 INSERT INTO TBL_USER (name) VALUES ('호석');

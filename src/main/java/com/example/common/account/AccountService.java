@@ -3,6 +3,8 @@ package com.example.common.account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by bequs-xhjlee on 2016-09-21.
  */
@@ -15,5 +17,9 @@ public class AccountService {
     public Account getAccount(String ac)
     {
         return accountRepository.findOneByAc(ac);
+    }
+
+    public List<Account> findAll() {
+        return accountRepository.findAll();
     }
 }

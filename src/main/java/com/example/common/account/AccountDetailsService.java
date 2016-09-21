@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by bequs-xhjlee on 2016-09-21.
@@ -18,6 +19,7 @@ public class AccountDetailsService implements UserDetailsService {
     private AccountService accountService;
 
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String ac) throws UsernameNotFoundException {
 
         Account account = accountService.getAccount(ac);
@@ -27,7 +29,7 @@ public class AccountDetailsService implements UserDetailsService {
             // 계정이 존재하지 않음
             throw new UsernameNotFoundException("login fail");
         }
-        log.info(account.toString());
+
         return new AccountDetails(account);
     }
 }

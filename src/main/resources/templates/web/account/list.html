@@ -1,10 +1,10 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Admin User</title>
+    <title>User user</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<p th:each="user : ${userList}" th:text="'Hello, ' + ${user.name} + '!'" />
+<p th:each="account : ${responseList}" th:text="'Hello, ' + ${account.name} + '!'" />
 </body>
 </html>

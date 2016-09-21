@@ -2,11 +2,13 @@ package com.example;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.stereotype.Controller;
 
 /**
  * Created by bequs-xhjlee on 2016-09-21.
  */
 @SpringBootApplication
+@Controller
 public class App {
 
     public static void main(String[] args) {

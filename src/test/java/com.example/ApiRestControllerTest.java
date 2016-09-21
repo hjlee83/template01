@@ -20,7 +20,7 @@ import static org.junit.Assert.assertThat;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class TestRestControllerTest {
+public class ApiRestControllerTest {
 
     @LocalServerPort
     private int port;
@@ -32,7 +32,7 @@ public class TestRestControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        this.base = new URL("http://localhost:" + port + "/");
+        this.base = new URL("http://localhost:" + port + "/api/user/list");
     }
 
     @Test

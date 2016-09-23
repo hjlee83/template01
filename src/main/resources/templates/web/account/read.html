@@ -1,0 +1,148 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="layouts/normal" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>User user</title>
+</head>
+<body>
+<div id="wrapper">
+
+    <th:block layout:fragment="content">
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header"><i class="fa fa-user fa-fw"></i> 내정보</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-7">
+                    <form role="form" th:object="${account}" method="post"
+                          enctype="multipart/form-data">
+                        <div class="row form-group">
+                            <div class="col-lg-1"></div>
+                            <label class="col-lg-2" for="ac">아이디</label>
+                            <div class="col-lg-5">
+                                <input type="text" class="form-control" id="ac" th:field="*{id}"
+                                       maxlength="20" readonly="readonly"/>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-lg-1"></div>
+                            <label class="col-lg-2" for="name">이름</label>
+                            <div class="col-lg-8">
+                                <input type="text" class="form-control" id="name" th:field="*{name}" maxlength="20"/>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-lg-1"></div>
+                            <div class="col-lg-2"><label>사진</label></div>
+                            <!--<div class="col-sm-3">
+                                <img id="previewImg" style="width:100%; height: 120px; max-width: 100px;" src="fileDownload?downname=<c:out value="${userInfo.photo}"/>">
+                            </div>-->
+                            <div class="col-lg-5">
+                                <input type="file" name="photofile" id="photofile" accept='image/*'/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary" role="formSave">저장</button>
+            <button type="button" class="btn btn-primary" role="openPopup">비밀번호변경</button>
+            <!-- /.row -->
+        </div>
+
+        <div id="myModal" style="display: none;" class="modal fade bs-example-modal-sm" role="dialog" tabindex="-1" aria-labelledby="mySmallModalLabel">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <h4 class="modal-title" id="mySmallModalLabel">비밀번호변경</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row form-group">
+                            <div class="col-lg-4"><label>비밀번호</label></div>
+                            <div class="col-sm-8">
+                                <input type="password" class="form-control" id="userpw" name="userpw" maxlength="20"/>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-lg-4"><label>비밀번호[확인]</label></div>
+                            <div class="col-sm-8">
+                                <input type="password" class="form-control" id="userpw2" name="userpw2" maxlength="20"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="close">닫기</button>
+                        <button type="submit" class="btn btn-primary" role="pwSave">저장</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </th:block>
+</div>
+<!-- 사용자 스크립트 추가 -->
+<th:block layout:fragment="script">
+
+    <script th:if="${SUCCESS}">
+        alert("수정되었습니다.");
+    </script>
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        $(function () {
+            $(".btn-primary[type='submit'][role='formSave']").on("click", function () {
+                if (!chkInputValue("#name", "이름")) return false;
+
+                $("form[role='form']").submit();
+            });
+
+            $(".btn-primary[type='button'][role='openPopup']").on("click", function () {
+                $("#userpw").val("");
+                $("#userpw2").val("");
+                $('#myModal').modal("show");
+            });
+
+            $(".btn-primary[type='submit'][role='pwSave']").on("click", function () {
+                /*if ( ! chkInputValue("#userpw", "비밀번호")) return false;
+                if ( ! chkInputValue("#userpw2", "비밀번호[확인]")) return false;
+                if ( $("#userpw").val() !== $("#userpw2").val()){
+                    alert("입력한 비밀번호가 정확하지 않습니다.");
+                    return false;
+                }*/
+
+                $.ajax({
+                    url: "/api/account",
+                    type:"PUT",
+                    data : JSON.stringify({pw:$("#userpw").val()}),
+                    dataType : 'text',
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-HTTP-Method-Override" : "PUT"
+                    },
+                    success: function(result){
+                        $("#myModal").modal("hide");
+                        alert("수정되었습니다.");
+                    },
+                    error : function(error) {
+                        var errorArr = JSON.parse(error.responseText);
+
+                        $.each(errorArr, function (item) {
+                            var errorItem = errorArr[item];
+                            console.log(errorItem.field, errorItem.defaultMessage);
+                        });
+                    }
+                });
+
+            });
+        });
+        /*]]>*/
+    </script>
+</th:block>
+</body>
+</html>

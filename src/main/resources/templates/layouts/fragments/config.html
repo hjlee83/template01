@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+ 
+    <head th:fragment="configFragment">
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <!-- Tell the browser to be responsive to screen width -->
+        <!--<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>-->
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content=""/>
+        <meta name="author" content=""/>
+        <meta name="ctx" th:content="${#httpServletRequest.contextPath}" />
+        <meta name="url" th:content="${#httpServletRequest.requestURI}" />
+        <!--<meta name="_csrf" th:content="${_csrf.token}"/>
+        &lt;!&ndash; default header name is X-CSRF-TOKEN &ndash;&gt;
+        <meta name="_csrf_header" th:content="${_csrf.headerName}"/>-->
+        <title>login</title>
+        <!-- Bootstrap Core CSS -->
+        <link th:href="@{/vendor/css/bootstrap.min.css}" rel="stylesheet"/>
+        <!-- MetisMenu CSS -->
+        <link th:href="@{/vendor/css/metisMenu.min.css}" rel="stylesheet"/>
+        <!-- Custom CSS -->
+        <link th:href="@{/dist/css/sb-admin-2.min.css}" rel="stylesheet"/>
+        <!-- Custom Fonts -->
+        <link th:href="@{/vendor/css/font-awesome.min.css}" rel="stylesheet" type="text/css"/>
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <!-- 사용자 CSS 영역이 들어감 -->
+        <th:block layout:fragment="css"></th:block>
+    </head>
+ 
+</html>

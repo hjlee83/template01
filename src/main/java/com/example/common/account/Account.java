@@ -14,10 +14,7 @@ import java.util.List;
 public class Account {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    @Column(unique = true)
-    private String ac;
+    private String id;
 
     private String pw;
 

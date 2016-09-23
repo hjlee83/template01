@@ -1,20 +1,41 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="layouts/login" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <title>login</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<div th:if="${param.error}">
-    Invalid username and password.
+<th:block layout:fragment="content">
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" th:text="${param.error}?'아이디비번이 잘못되었습니다.':(${param.logout}?'로그아웃하셨습니다.':'로그인하세요.')">Please Sign In</h3>
+                </div>
+                <div class="panel-body">
+                    <form th:action="@{/login}" role="form" method="post">
+                        <fieldset>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="ID" name="username" type="text" autofocus="autofocus"/>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Password" name="password" type="password" value=""/>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input name="remember" type="checkbox" value="Remember Me"/>Remember Me
+                                </label>
+                            </div>
+                            <!-- Change this to a button or input when using this as a form -->
+                            <div><input type="submit" class="btn btn-lg btn-success btn-block" value="Sign In"/></div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<div th:if="${param.logout}">
-    You have been logged out.
-</div>
-<form th:action="@{/login}" method="post">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
-    <div><input type="submit" value="Sign In"/></div>
-</form>
+</th:block>
 </body>
 </html>

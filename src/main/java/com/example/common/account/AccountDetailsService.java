@@ -20,9 +20,9 @@ public class AccountDetailsService implements UserDetailsService {
 
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String ac) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
 
-        Account account = accountService.getAccount(ac);
+        Account account = accountService.findOne(id);
 
         if (account == null)
         {

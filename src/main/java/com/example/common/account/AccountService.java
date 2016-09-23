@@ -14,12 +14,16 @@ public class AccountService {
     @Autowired
     private AccountRepository accountRepository;
 
-    public Account getAccount(String ac)
+    public Account findOne(String id)
     {
-        return accountRepository.findOneByAc(ac);
+        return accountRepository.findOne(id);
     }
 
     public List<Account> findAll() {
         return accountRepository.findAll();
+    }
+
+    public Account save(Account account) {
+        return accountRepository.save(account);
     }
 }

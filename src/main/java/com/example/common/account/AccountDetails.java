@@ -1,5 +1,6 @@
 package com.example.common.account;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.User;
 
@@ -9,7 +10,11 @@ import org.springframework.security.core.userdetails.User;
 @Slf4j
 public class AccountDetails extends User {
 
+    @Getter
+    private String name;
+
     public AccountDetails(Account account) {
-      super(account.getAc(), account.getPw(), account.getRoles());
+      super(account.getId(), account.getPw(), account.getRoles());
+        this.name = account.getName();
     }
 }

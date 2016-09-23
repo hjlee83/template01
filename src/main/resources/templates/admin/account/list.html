@@ -1,10 +1,17 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="layouts/normal" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <title>Admin User</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<p th:each="account : ${responseList}" th:text="'Hello, ' + ${account.name} + '!'" />
+<div id="wrapper">
+
+    <th:block layout:fragment="content">
+        <div id="page-wrapper">
+            <p th:each="account : ${responseList}" th:text="'Hello, ' + ${account.name} + '!'"/>
+        </div>
+    </th:block>
+</div>
 </body>
 </html>
